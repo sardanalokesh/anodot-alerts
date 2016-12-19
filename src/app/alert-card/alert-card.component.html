@@ -1,0 +1,43 @@
+<div class="card">
+  <div class="card-block">
+    <h4 class="card-title">[{{data?.severity}}] {{data?.subject}}</h4>
+    <h6 class="card-subtitle text-muted">The event was triggered on {{data?.startTime}}</h6>
+  </div>
+  <div class="card-block">
+     <a class="btn btn-info" href="{{data?.investigationUrl}}">Investigate</a>
+     <div *ngFor="let alert of data?.alerts">
+       <p class="card-text">{{alert.title}}</p>
+       <table class="table">
+         <thead class="thead-inverse">
+         <tr>
+           <th>#</th>
+           <th>Metric</th>
+           <th>Start (UTC)</th>
+           <th>Duration</th>
+           <th>State</th>
+           <th>Delta</th>
+           <th>Peak</th>
+           <th>Sig.</th>
+         </tr>
+         </thead>
+         <tbody *ngFor="let metric of alert.metrics; let i=index">
+          <tr>
+            <th scope="row">{{i}}</th>
+            <td>{{metric.name}}</td>
+            <td>{{metric.startTime}}</td>
+            <td>{{metric.duration}}</td>
+            <td>{{metric.state}}</td>
+            <td>{{metric.delta}}</td>
+            <td>{{metric.peak}}</td>
+            <td>{{metric.significance}}</td>
+          </tr>
+         <tr>
+           <td colspan="8">
+              <img [src]="metric.imageUrl" alt="" style="width: 100%;">
+           </td>
+         </tr>
+         </tbody>
+       </table>
+     </div>
+  </div>
+</div>
